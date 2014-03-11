@@ -1,0 +1,20 @@
+#include <Servo.h>
+
+Servo rightMotor;
+
+void setup() {
+rightMotor.attach(10,90,180);
+}
+
+void loop() {
+    for (int i = 110; i<=180; i++)
+    {
+      rightMotor.write(i);
+      delay(15);
+   }
+   for (int j = 180; j>=110; j--)
+   {
+     rightMotor.write(j);
+     delay(15);
+   }
+}
