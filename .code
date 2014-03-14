@@ -1,11 +1,13 @@
 #include <Servo.h>
 
+int bumper = 8;
 Servo rightMotor;
 Servo leftMotor;
 
 void setup() {
 rightMotor.attach(9);
 leftMotor.attach(10);
+pinMode(bumper,INPUT);
 }
 
 void loop() {
@@ -20,5 +22,8 @@ void loop() {
      rightMotor.write(j);
      leftMotor.write(j);
      delay(15);
+   }
+   if (digitalRead(bumper)==HIGH){
+     
    }
  }
