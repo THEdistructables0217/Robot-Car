@@ -1,41 +1,36 @@
 #include <Servo.h>
 
-int bumper = 5;
+int button = 2;
 Servo rightMotor;
 Servo leftMotor;
 
 void setup() {
 Serial.begin(9600);
-rightMotor.attach(9);
-leftMotor.attach(10);
-pinMode(bumper,INPUT);
+rightMotor.attach(9,90,180);
+leftMotor.attach(10,90,180);
+pinMode(button,INPUT);
+attachInterrupt(0, bumper, RISING);
+Serial.begin(9600);
+}
+void bumper() {
+  Serial.println("button pressed");
+    for (int j = 180; j>=110; j--) {
+    rightMotor.write(j);
+    delay(15);
+    }
 }
 
 void loop() {
-    for (int i = 110; i<=180; i++)
+    for (int i = 120; i<=180; i++)
     {
       rightMotor.write(i);
       leftMotor.write(i);
       delay(15);
    }
-   for (int j = 180; j>=110; j--)
+   for (int j = 180; j>=120; j--)
    {
      rightMotor.write(j);
      leftMotor.write(j);
      delay(15);
    }
-   if (digitalRead(bumper)==HIGH){
-     Serial.println("button on");
-     leftMotor.write(90);
-     rightMotor.write(90);
-     
-     for (int j = 90; j>=0; j--)
-     {
-        rightMotor.write(j);
-     }
-     for (int i = 0; i<=90; i++)
-     {
-        rightMotor.write(i);
-     }
-   }
- }
+  }
